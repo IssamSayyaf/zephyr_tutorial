@@ -1,0 +1,15 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/issam/projects/blink_nrf52840/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+LED0_NODE	src/main.c	/^#define LED0_NODE /;"	d	file:
+SLEEP_TIME_MS	src/main.c	/^#define SLEEP_TIME_MS /;"	d	file:
+led	src/main.c	/^static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);$/;"	v	typeref:typename:const struct gpio_dt_spec	file:
+main	src/main.c	/^int main(void)$/;"	f	typeref:typename:int
