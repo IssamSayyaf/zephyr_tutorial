@@ -1,0 +1,4 @@
+west:
+  command: /home/issam/zephyrproject/.venv/bin/west build
+  topdir: /home/issam/zephyrproject
+  version: 1.3.0

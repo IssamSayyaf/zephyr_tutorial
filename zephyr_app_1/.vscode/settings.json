@@ -1,0 +1,14 @@
+{
+    // "terminal.integrated.env.osx": {
+    //     "PATH": "$HOME/zephyrproject/zephyr/scripts",
+    //     "ZEPHYR_BASE": "${env:HOME}/zephyrproject/zephyr",
+    // },
+    "terminal.integrated.env.linux": {
+        "PATH": "$HOME/zephyrproject/zephyr/scripts:${env:PATH}",
+        "ZEPHYR_BASE": "${env:HOME}/zephyrproject/zephyr",
+    },
+    // "terminal.integrated.env.windows": {
+    //     "PATH": "${env:USERPROFILE}\\zephyrproject\\zephyr\\scripts;${env:PATH}",
+    //     "ZEPHYR_BASE": "${env:USERPROFILE}\\zephyrproject\\zephyr",
+    // },
+   }

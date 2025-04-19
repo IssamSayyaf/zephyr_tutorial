@@ -1,0 +1,3 @@
+/home/issam/projects/zephyr_app_1/build/bootloader/CMakeFiles/boot_stage2.dir
+/home/issam/projects/zephyr_app_1/build/bootloader/CMakeFiles/edit_cache.dir
+/home/issam/projects/zephyr_app_1/build/bootloader/CMakeFiles/rebuild_cache.dir

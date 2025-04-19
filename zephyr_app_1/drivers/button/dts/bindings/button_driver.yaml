@@ -1,0 +1,10 @@
+description: Button driver for Raspberry Pi Pico
+
+compatible: "button-driver"
+
+include: [base.yaml, gpio.yaml]
+
+properties:
+  gpios:
+    required: true
+    description: GPIO pin for the button 

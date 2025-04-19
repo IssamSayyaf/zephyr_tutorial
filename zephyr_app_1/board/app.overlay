@@ -1,0 +1,13 @@
+/ {
+	buttons {
+		compatible = "button-driver";
+		button0: button_0 {
+			gpios = <&gpio0 15 GPIO_ACTIVE_LOW>;
+			label = "User Button";
+		};
+	};
+
+	aliases {
+		button0 = &button0;
+	};
+};

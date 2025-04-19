@@ -1,0 +1,56 @@
+cmake:
+  application:
+    configuration-dir: '/home/issam/projects/zephyr_app_1'
+    source-dir: '/home/issam/projects/zephyr_app_1'
+  board:
+    name: 'rpi_pico'
+    path:
+     - '/home/issam/zephyrproject/zephyr/boards/raspberrypi/rpi_pico'
+    qualifiers: 'rp2040'
+    revision: ''
+  devicetree:
+    bindings-dirs:
+     - '/home/issam/zephyrproject/zephyr/dts/bindings'
+    files:
+     - '/home/issam/zephyrproject/zephyr/boards/raspberrypi/rpi_pico/rpi_pico.dts'
+     - 'board/app.overlay'
+    include-dirs:
+     - '/home/issam/zephyrproject/modules/hal/atmel/include'
+     - '/home/issam/zephyrproject/modules/hal/gigadevice/include'
+     - '/home/issam/zephyrproject/modules/hal/microchip/include'
+     - '/home/issam/zephyrproject/modules/hal/microchip/dts'
+     - '/home/issam/zephyrproject/modules/hal/nuvoton/dts'
+     - '/home/issam/zephyrproject/modules/hal/nxp/dts'
+     - '/home/issam/zephyrproject/modules/hal/stm32/dts'
+     - '/home/issam/zephyrproject/zephyr/include'
+     - '/home/issam/zephyrproject/zephyr/include/zephyr'
+     - '/home/issam/zephyrproject/zephyr/dts/common'
+     - '/home/issam/zephyrproject/zephyr/dts/x86'
+     - '/home/issam/zephyrproject/zephyr/dts/xtensa'
+     - '/home/issam/zephyrproject/zephyr/dts/sparc'
+     - '/home/issam/zephyrproject/zephyr/dts/riscv'
+     - '/home/issam/zephyrproject/zephyr/dts/posix'
+     - '/home/issam/zephyrproject/zephyr/dts/nios2'
+     - '/home/issam/zephyrproject/zephyr/dts/arm64'
+     - '/home/issam/zephyrproject/zephyr/dts/arm'
+     - '/home/issam/zephyrproject/zephyr/dts/arc'
+     - '/home/issam/zephyrproject/zephyr/dts'
+    user-files:
+     - 'board/app.overlay'
+  kconfig:
+    files:
+     - '/home/issam/zephyrproject/zephyr/boards/raspberrypi/rpi_pico/rpi_pico_defconfig'
+     - '/home/issam/projects/zephyr_app_1/prj.conf'
+    user-files:
+     - '/home/issam/projects/zephyr_app_1/prj.conf'
+  toolchain:
+    name: 'zephyr'
+    path: '/home/issam/zephyr-sdk-0.17.0'
+  zephyr:
+    version: '4.1.99'
+    zephyr-base: '/home/issam/zephyrproject/zephyr'
+version: '0.1.0'
+west:
+  command: '/home/issam/zephyrproject/.venv/bin/west build'
+  topdir: '/home/issam/zephyrproject'
+  version: '1.3.0'

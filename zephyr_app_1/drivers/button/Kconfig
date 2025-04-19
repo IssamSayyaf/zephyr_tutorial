@@ -1,0 +1,22 @@
+config BUTTON_DRIVER
+	bool "Button Driver"
+	depends on GPIO
+	help
+	  Enable button driver support.
+
+if BUTTON_DRIVER
+
+module = BUTTON_DRIVER
+module-str = button driver
+source "subsys/logging/Kconfig.template.log_config"
+
+config BUTTON_DRIVER_INIT_PRIORITY
+	int "Button driver initialization priority"
+	default 75
+	help
+	  Device driver initialization priority.
+	  Device is connected to GPIO pins, it has to
+	  be initialized after GPIO driver and after
+	  the GPIO pin is configured.
+
+endif # BUTTON_DRIVER 
