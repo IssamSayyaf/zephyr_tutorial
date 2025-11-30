@@ -35,26 +35,41 @@ This tutorial repository provides a complete guide to developing drivers in Zeph
 └── 04_kconfig_guide.md          # Kconfig system
 ```
 
-### Phase 2: Peripheral Drivers
+### Phase 2: Driver Architecture Deep Dive
 ```
-📁 drivers/
-├── uart_advanced/               # UART with interrupts, DMA, async
-└── spi_advanced/                # SPI with DMA, chip select, modes
+📁 docs/
+├── 05_driver_development.md     # Driver patterns & implementation
+├── 06_testing_debugging.md      # Testing strategies
+├── 07_driver_skeleton_template.md   # Complete driver template with explanations
+└── 08_driver_design_principles.md   # Design principles & best practices
 ```
 
-### Phase 3: Sensor Drivers
+### Phase 3: Code Walkthroughs (Line-by-Line Explanations)
 ```
-📁 drivers/
+📁 docs/
+├── 09_uart_driver_walkthrough.md    # UART driver deep dive
+├── 10_spi_driver_walkthrough.md     # SPI driver deep dive
+└── 11_sensor_drivers_walkthrough.md # MPU6050, GPS, Ultrasonic explained
+```
+
+### Phase 4: Hands-On with Drivers
+```
+📁 modules/custom_drivers/drivers/
+├── uart_advanced/               # UART with interrupts, DMA, async
+├── spi_advanced/                # SPI with DMA, chip select, modes
 ├── mpu6050/                     # I2C accelerometer/gyroscope
 ├── ublox_neo_m8n/               # UART GPS module
 └── ultrasonic/                  # GPIO-based distance sensor
 ```
 
-### Phase 4: Integration
+### Phase 5: Example Applications
 ```
 📁 apps/
-├── sensor_hub/                  # Multi-sensor application
-└── data_logger/                 # Complete data logging example
+├── uart_example/                # UART communication demo
+├── spi_example/                 # SPI multi-device demo
+├── mpu6050_example/             # IMU reading & orientation
+├── gps_example/                 # GPS position tracking
+└── ultrasonic_example/          # Distance measurement
 ```
 
 ---
@@ -84,12 +99,17 @@ west --version
 zephyr_tutorial/
 ├── README.md                    # This file
 ├── docs/                        # Documentation & guides
-│   ├── 01_zephyr_basics.md
-│   ├── 02_device_model.md
-│   ├── 03_devicetree_guide.md
-│   ├── 04_kconfig_guide.md
-│   ├── 05_driver_development.md
-│   └── 06_testing_debugging.md
+│   ├── 01_zephyr_basics.md          # Zephyr fundamentals
+│   ├── 02_device_model.md           # Device model architecture
+│   ├── 03_devicetree_guide.md       # Device Tree guide
+│   ├── 04_kconfig_guide.md          # Kconfig system
+│   ├── 05_driver_development.md     # Driver development patterns
+│   ├── 06_testing_debugging.md      # Testing strategies
+│   ├── 07_driver_skeleton_template.md   # Complete skeleton with WHY/HOW
+│   ├── 08_driver_design_principles.md   # Design principles
+│   ├── 09_uart_driver_walkthrough.md    # UART code walkthrough
+│   ├── 10_spi_driver_walkthrough.md     # SPI code walkthrough
+│   └── 11_sensor_drivers_walkthrough.md # Sensor drivers explained
 │
 ├── modules/                     # Out-of-tree modules
 │   └── custom_drivers/
@@ -150,14 +170,28 @@ west build -b <board> -- -DEXTRA_ZEPHYR_MODULES=/path/to/modules/custom_drivers
 
 ## Tutorials
 
+### Foundations
 | Tutorial | Description | Difficulty |
 |----------|-------------|------------|
 | [Zephyr Basics](docs/01_zephyr_basics.md) | Introduction to Zephyr concepts | Beginner |
 | [Device Model](docs/02_device_model.md) | Understanding Zephyr's device model | Beginner |
 | [Device Tree Guide](docs/03_devicetree_guide.md) | Creating device tree bindings | Intermediate |
 | [Kconfig Guide](docs/04_kconfig_guide.md) | Configuration system | Intermediate |
+
+### Driver Development
+| Tutorial | Description | Difficulty |
+|----------|-------------|------------|
 | [Driver Development](docs/05_driver_development.md) | Building custom drivers | Advanced |
 | [Testing & Debugging](docs/06_testing_debugging.md) | Testing and debugging drivers | Advanced |
+| [Driver Skeleton Template](docs/07_driver_skeleton_template.md) | Complete template with WHY and HOW explanations | Advanced |
+| [Design Principles](docs/08_driver_design_principles.md) | Architecture and design best practices | Advanced |
+
+### Code Walkthroughs (Detailed Explanations)
+| Tutorial | Description | Focus |
+|----------|-------------|-------|
+| [UART Driver Walkthrough](docs/09_uart_driver_walkthrough.md) | Line-by-line UART driver explanation | Polling, Interrupt, DMA, Ring buffers |
+| [SPI Driver Walkthrough](docs/10_spi_driver_walkthrough.md) | Line-by-line SPI driver explanation | Modes, Multi-device, CS management |
+| [Sensor Drivers Walkthrough](docs/11_sensor_drivers_walkthrough.md) | MPU6050, GPS, Ultrasonic explained | I2C, UART, GPIO timing patterns |
 
 ---
 
