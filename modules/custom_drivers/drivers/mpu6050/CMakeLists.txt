@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+
+zephyr_library()
+
+zephyr_library_sources(
+    src/mpu6050.c
+)
+
+zephyr_library_sources_ifdef(CONFIG_MPU6050_TRIGGER
+    src/mpu6050_trigger.c
+)
+
+zephyr_library_sources_ifdef(CONFIG_MPU6050_SHELL
+    src/mpu6050_shell.c
+)
+
+zephyr_include_directories(include)

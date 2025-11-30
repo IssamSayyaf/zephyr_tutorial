@@ -1,0 +1,71 @@
+# SPDX-License-Identifier: Apache-2.0
+# Device Tree binding for uBlox NEO-M8N GPS
+
+description: |
+  uBlox NEO-M8N GPS/GNSS receiver module.
+  Provides position, velocity, and time via NMEA protocol.
+
+compatible: "u-blox,neo-m8n"
+
+include: uart-device.yaml
+
+properties:
+  current-speed:
+    type: int
+    required: false
+    default: 9600
+    description: |
+      UART baud rate. NEO-M8N defaults to 9600.
+      Can be configured to 4800, 9600, 19200, 38400, 57600, 115200.
+
+  pps-gpios:
+    type: phandle-array
+    required: false
+    description: |
+      GPIO connected to the PPS (Pulse Per Second) output.
+
+  reset-gpios:
+    type: phandle-array
+    required: false
+    description: |
+      GPIO connected to the reset pin.
+
+  extint-gpios:
+    type: phandle-array
+    required: false
+    description: |
+      GPIO connected to the EXTINT pin for external interrupt.
+
+  enable-sbas:
+    type: boolean
+    required: false
+    description: |
+      Enable SBAS (Satellite-Based Augmentation System) for improved accuracy.
+
+  enable-glonass:
+    type: boolean
+    required: false
+    description: |
+      Enable GLONASS constellation (in addition to GPS).
+
+  enable-galileo:
+    type: boolean
+    required: false
+    description: |
+      Enable Galileo constellation.
+
+  dynamic-model:
+    type: string
+    required: false
+    default: "portable"
+    enum:
+      - "portable"
+      - "stationary"
+      - "pedestrian"
+      - "automotive"
+      - "sea"
+      - "airborne-1g"
+      - "airborne-2g"
+      - "airborne-4g"
+    description: |
+      Navigation dynamic model. Affects position filtering.

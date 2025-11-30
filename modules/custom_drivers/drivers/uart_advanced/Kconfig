@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: Apache-2.0
+# UART Advanced Driver Kconfig
+
+menuconfig UART_ADVANCED
+    bool "UART Advanced Driver"
+    depends on SERIAL
+    help
+      Enable the advanced UART driver with full capability support
+      including polling, interrupt, async/DMA, and flow control modes.
+
+if UART_ADVANCED
+
+config UART_ADVANCED_INIT_PRIORITY
+    int "Driver initialization priority"
+    default 55
+    help
+      Device driver initialization priority.
+
+config UART_ADVANCED_RX_BUFFER_SIZE
+    int "RX buffer size"
+    default 256
+    range 64 4096
+    help
+      Size of the receive ring buffer in bytes.
+
+config UART_ADVANCED_TX_BUFFER_SIZE
+    int "TX buffer size"
+    default 256
+    range 64 4096
+    help
+      Size of the transmit ring buffer in bytes.
+
+config UART_ADVANCED_ASYNC
+    bool "Enable async (DMA) mode"
+    depends on DMA
+    default n
+    help
+      Enable DMA-based asynchronous transfer support.
+
+config UART_ADVANCED_ASYNC_RX_BUFFER_SIZE
+    int "Async RX buffer size"
+    depends on UART_ADVANCED_ASYNC
+    default 512
+    help
+      Size of each async receive buffer.
+
+config UART_ADVANCED_ASYNC_RX_BUFFER_COUNT
+    int "Number of async RX buffers"
+    depends on UART_ADVANCED_ASYNC
+    default 2
+    range 2 8
+    help
+      Number of receive buffers for double/multi-buffering.
+
+config UART_ADVANCED_FLOW_CONTROL
+    bool "Enable hardware flow control support"
+    default n
+    help
+      Enable RTS/CTS hardware flow control.
+
+config UART_ADVANCED_SHELL
+    bool "Enable shell commands"
+    depends on SHELL
+    default y
+    help
+      Enable shell commands for UART driver testing and debugging.
+
+module = UART_ADVANCED
+module-str = uart_advanced
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # UART_ADVANCED

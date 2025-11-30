@@ -1,0 +1,10 @@
+/* Ultrasonic Example - nRF52840 DK Board Overlay */
+
+/ {
+    ultrasonic0: ultrasonic {
+        compatible = "custom,ultrasonic";
+        trigger-gpios = <&gpio0 3 GPIO_ACTIVE_HIGH>;
+        echo-gpios = <&gpio0 4 GPIO_ACTIVE_HIGH>;
+        max-range-cm = <400>;
+    };
+};

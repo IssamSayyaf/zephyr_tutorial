@@ -1,0 +1,11 @@
+/* GPS Example - nRF52840 DK Board Overlay */
+
+&uart1 {
+    status = "okay";
+    current-speed = <9600>;
+
+    gps: gps {
+        compatible = "u-blox,neo-m8n";
+        current-speed = <9600>;
+    };
+};

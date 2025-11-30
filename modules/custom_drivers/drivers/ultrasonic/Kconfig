@@ -1,0 +1,84 @@
+# SPDX-License-Identifier: Apache-2.0
+# Ultrasonic Distance Sensor Driver Kconfig
+
+menuconfig ULTRASONIC
+    bool "Ultrasonic Distance Sensor Driver"
+    depends on GPIO
+    help
+      Enable driver for HC-SR04 style ultrasonic distance sensors.
+      Uses GPIO for trigger and echo pins.
+
+if ULTRASONIC
+
+config ULTRASONIC_INIT_PRIORITY
+    int "Driver initialization priority"
+    default 90
+    help
+      Device driver initialization priority.
+
+config ULTRASONIC_TRIGGER_PULSE_US
+    int "Trigger pulse width (microseconds)"
+    default 10
+    range 5 20
+    help
+      Duration of the trigger pulse in microseconds.
+      HC-SR04 requires minimum 10us.
+
+config ULTRASONIC_ECHO_TIMEOUT_MS
+    int "Echo timeout (milliseconds)"
+    default 30
+    range 10 100
+    help
+      Maximum time to wait for echo response.
+      30ms corresponds to ~5m range at speed of sound.
+
+config ULTRASONIC_SOUND_SPEED_CM_US
+    int "Speed of sound (cm/us * 1000)"
+    default 343
+    help
+      Speed of sound in centimeters per microsecond, multiplied by 1000.
+      At 20C, speed is 343 m/s = 0.0343 cm/us = 34.3 (x1000).
+      Default 343 = 0.0343 cm/us.
+
+config ULTRASONIC_TEMP_COMPENSATION
+    bool "Enable temperature compensation"
+    default n
+    help
+      Adjust speed of sound based on temperature.
+      Requires providing temperature during measurement.
+
+config ULTRASONIC_MEDIAN_FILTER
+    bool "Enable median filtering"
+    default y
+    help
+      Take multiple readings and return median value
+      to reduce noise.
+
+config ULTRASONIC_MEDIAN_SAMPLES
+    int "Number of samples for median filter"
+    depends on ULTRASONIC_MEDIAN_FILTER
+    default 5
+    range 3 11
+    help
+      Number of samples for median filtering.
+      Must be odd number.
+
+config ULTRASONIC_MIN_INTERVAL_MS
+    int "Minimum interval between measurements (ms)"
+    default 60
+    help
+      Minimum time between measurements to avoid
+      interference from previous echo.
+
+config ULTRASONIC_SHELL
+    bool "Enable shell commands"
+    depends on SHELL
+    default y
+    help
+      Enable shell commands for ultrasonic sensor testing.
+
+module = ULTRASONIC
+module-str = ultrasonic
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # ULTRASONIC

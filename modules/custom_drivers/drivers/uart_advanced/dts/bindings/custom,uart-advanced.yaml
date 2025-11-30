@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: Apache-2.0
+# Device Tree binding for UART Advanced Driver
+
+description: |
+  Advanced UART driver wrapper providing extended functionality
+  including ring buffer management, multiple operating modes,
+  and statistics tracking.
+
+compatible: "custom,uart-advanced"
+
+include: base.yaml
+
+properties:
+  uart-device:
+    type: phandle
+    required: true
+    description: |
+      Reference to the underlying UART device that this driver
+      will use for communication.
+
+  current-speed:
+    type: int
+    required: false
+    default: 115200
+    description: |
+      Default baud rate for the UART. Common values are:
+      9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600
+
+  hw-flow-control:
+    type: boolean
+    required: false
+    description: |
+      Enable hardware flow control (RTS/CTS).
+
+  rx-buffer-size:
+    type: int
+    required: false
+    default: 256
+    description: |
+      Size of the RX ring buffer in bytes.
+
+  tx-buffer-size:
+    type: int
+    required: false
+    default: 256
+    description: |
+      Size of the TX ring buffer in bytes.

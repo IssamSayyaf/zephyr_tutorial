@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0
+# Device Tree binding for SPI Advanced Driver
+
+description: |
+  Advanced SPI driver wrapper providing extended functionality
+  including multi-device management, DMA support, async operations,
+  and comprehensive statistics.
+
+compatible: "custom,spi-advanced"
+
+include: base.yaml
+
+properties:
+  spi-device:
+    type: phandle
+    required: true
+    description: |
+      Reference to the underlying SPI controller device.
+
+  max-frequency:
+    type: int
+    required: false
+    default: 10000000
+    description: |
+      Maximum SPI clock frequency in Hz.
+
+  dma-enabled:
+    type: boolean
+    required: false
+    description: |
+      Enable DMA for large transfers.
+
+  dma-threshold:
+    type: int
+    required: false
+    default: 32
+    description: |
+      Minimum transfer size (bytes) to use DMA.

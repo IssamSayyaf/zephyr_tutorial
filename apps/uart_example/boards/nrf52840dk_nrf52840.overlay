@@ -1,0 +1,14 @@
+/* UART Advanced Example - nRF52840 DK Board Overlay */
+
+/ {
+    uart_adv0: uart-advanced {
+        compatible = "custom,uart-advanced";
+        uart-device = <&uart1>;
+        current-speed = <115200>;
+    };
+};
+
+&uart1 {
+    status = "okay";
+    current-speed = <115200>;
+};

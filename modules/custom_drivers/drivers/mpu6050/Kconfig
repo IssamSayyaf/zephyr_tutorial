@@ -1,0 +1,121 @@
+# SPDX-License-Identifier: Apache-2.0
+# MPU6050 Custom Sensor Driver Kconfig
+
+menuconfig MPU6050_CUSTOM
+    bool "MPU6050 IMU Sensor Driver"
+    depends on I2C
+    help
+      Enable driver for InvenSense MPU6050 6-axis IMU sensor.
+      Provides accelerometer and gyroscope readings.
+
+if MPU6050_CUSTOM
+
+config MPU6050_CUSTOM_INIT_PRIORITY
+    int "Driver initialization priority"
+    default 90
+    help
+      Device driver initialization priority.
+
+choice MPU6050_ACCEL_FS
+    prompt "Accelerometer full-scale range"
+    default MPU6050_ACCEL_FS_2G
+
+config MPU6050_ACCEL_FS_2G
+    bool "+/- 2g"
+
+config MPU6050_ACCEL_FS_4G
+    bool "+/- 4g"
+
+config MPU6050_ACCEL_FS_8G
+    bool "+/- 8g"
+
+config MPU6050_ACCEL_FS_16G
+    bool "+/- 16g"
+
+endchoice
+
+choice MPU6050_GYRO_FS
+    prompt "Gyroscope full-scale range"
+    default MPU6050_GYRO_FS_250DPS
+
+config MPU6050_GYRO_FS_250DPS
+    bool "+/- 250 dps"
+
+config MPU6050_GYRO_FS_500DPS
+    bool "+/- 500 dps"
+
+config MPU6050_GYRO_FS_1000DPS
+    bool "+/- 1000 dps"
+
+config MPU6050_GYRO_FS_2000DPS
+    bool "+/- 2000 dps"
+
+endchoice
+
+config MPU6050_SAMPLE_RATE_DIV
+    int "Sample rate divider"
+    default 0
+    range 0 255
+    help
+      Sample rate = Gyroscope Output Rate / (1 + SMPLRT_DIV)
+      Gyroscope Output Rate = 8kHz (DLPF disabled) or 1kHz (DLPF enabled)
+
+config MPU6050_DLPF_CFG
+    int "Digital Low Pass Filter configuration"
+    default 6
+    range 0 7
+    help
+      DLPF configuration value.
+      0: Accel 260Hz, Gyro 256Hz
+      1: Accel 184Hz, Gyro 188Hz
+      2: Accel 94Hz, Gyro 98Hz
+      3: Accel 44Hz, Gyro 42Hz
+      4: Accel 21Hz, Gyro 20Hz
+      5: Accel 10Hz, Gyro 10Hz
+      6: Accel 5Hz, Gyro 5Hz
+      7: Reserved
+
+config MPU6050_TRIGGER
+    bool "Enable trigger mode"
+    depends on GPIO
+    help
+      Enable interrupt-based data ready trigger.
+
+choice MPU6050_TRIGGER_MODE
+    prompt "Trigger mode"
+    depends on MPU6050_TRIGGER
+    default MPU6050_TRIGGER_GLOBAL_THREAD
+
+config MPU6050_TRIGGER_NONE
+    bool "No trigger"
+
+config MPU6050_TRIGGER_GLOBAL_THREAD
+    bool "Use global thread"
+
+config MPU6050_TRIGGER_OWN_THREAD
+    bool "Use own thread"
+
+endchoice
+
+config MPU6050_THREAD_PRIORITY
+    int "Trigger thread priority"
+    depends on MPU6050_TRIGGER_OWN_THREAD
+    default 10
+
+config MPU6050_THREAD_STACK_SIZE
+    int "Trigger thread stack size"
+    depends on MPU6050_TRIGGER_OWN_THREAD
+    default 1024
+
+config MPU6050_SHELL
+    bool "Enable shell commands"
+    depends on SHELL
+    default y
+    help
+      Enable shell commands for MPU6050 testing.
+
+module = MPU6050_CUSTOM
+module-str = mpu6050
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # MPU6050_CUSTOM

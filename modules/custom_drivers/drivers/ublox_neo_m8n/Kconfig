@@ -1,0 +1,93 @@
+# SPDX-License-Identifier: Apache-2.0
+# uBlox NEO-M8N GPS Driver Kconfig
+
+menuconfig UBLOX_NEO_M8N
+    bool "uBlox NEO-M8N GPS Driver"
+    depends on SERIAL
+    help
+      Enable driver for uBlox NEO-M8N GPS/GNSS module.
+      Parses NMEA sentences for position, velocity, and time.
+
+if UBLOX_NEO_M8N
+
+config UBLOX_NEO_M8N_INIT_PRIORITY
+    int "Driver initialization priority"
+    default 90
+    help
+      Device driver initialization priority.
+
+config UBLOX_NEO_M8N_RX_BUFFER_SIZE
+    int "NMEA receive buffer size"
+    default 256
+    range 128 1024
+    help
+      Size of the NMEA sentence receive buffer.
+
+config UBLOX_NEO_M8N_DEFAULT_BAUDRATE
+    int "Default UART baud rate"
+    default 9600
+    help
+      Default baud rate for GPS module communication.
+      NEO-M8N default is 9600.
+
+config UBLOX_NEO_M8N_PARSE_GGA
+    bool "Parse GGA sentences"
+    default y
+    help
+      Parse GPGGA/GNGGA sentences for position and fix quality.
+
+config UBLOX_NEO_M8N_PARSE_RMC
+    bool "Parse RMC sentences"
+    default y
+    help
+      Parse GPRMC/GNRMC sentences for position, speed, and course.
+
+config UBLOX_NEO_M8N_PARSE_GSA
+    bool "Parse GSA sentences"
+    default y
+    help
+      Parse GPGSA/GNGSA sentences for DOP and satellite info.
+
+config UBLOX_NEO_M8N_PARSE_GSV
+    bool "Parse GSV sentences"
+    default n
+    help
+      Parse GPGSV/GNGSV sentences for satellite details.
+
+config UBLOX_NEO_M8N_PARSE_VTG
+    bool "Parse VTG sentences"
+    default y
+    help
+      Parse GPVTG/GNVTG sentences for ground speed.
+
+config UBLOX_NEO_M8N_UBX_PROTOCOL
+    bool "Enable UBX protocol support"
+    default n
+    help
+      Enable uBlox proprietary UBX protocol for configuration
+      and additional data.
+
+config UBLOX_NEO_M8N_THREAD_STACK_SIZE
+    int "Processing thread stack size"
+    default 1024
+    help
+      Stack size for the NMEA parsing thread.
+
+config UBLOX_NEO_M8N_THREAD_PRIORITY
+    int "Processing thread priority"
+    default 10
+    help
+      Priority of the NMEA parsing thread.
+
+config UBLOX_NEO_M8N_SHELL
+    bool "Enable shell commands"
+    depends on SHELL
+    default y
+    help
+      Enable shell commands for GPS testing.
+
+module = UBLOX_NEO_M8N
+module-str = ublox_neo_m8n
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # UBLOX_NEO_M8N

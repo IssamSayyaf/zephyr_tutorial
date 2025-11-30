@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# Custom Drivers Module Kconfig
+
+menu "Custom Drivers"
+
+rsource "drivers/uart_advanced/Kconfig"
+rsource "drivers/spi_advanced/Kconfig"
+rsource "drivers/mpu6050/Kconfig"
+rsource "drivers/ublox_neo_m8n/Kconfig"
+rsource "drivers/ultrasonic/Kconfig"
+
+endmenu

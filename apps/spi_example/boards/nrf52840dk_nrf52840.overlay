@@ -1,0 +1,13 @@
+/* SPI Advanced Example - nRF52840 DK Board Overlay */
+
+/ {
+    spi_adv0: spi-advanced {
+        compatible = "custom,spi-advanced";
+        spi-device = <&spi1>;
+        max-frequency = <8000000>;
+    };
+};
+
+&spi1 {
+    status = "okay";
+};

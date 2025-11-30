@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+# Device Tree binding for Ultrasonic Distance Sensor
+
+description: |
+  HC-SR04 style ultrasonic distance sensor.
+  Uses GPIO for trigger and echo pins.
+
+compatible: "custom,ultrasonic"
+
+include: base.yaml
+
+properties:
+  trigger-gpios:
+    type: phandle-array
+    required: true
+    description: |
+      GPIO pin connected to the TRIG pin of the sensor.
+      Configured as output.
+
+  echo-gpios:
+    type: phandle-array
+    required: true
+    description: |
+      GPIO pin connected to the ECHO pin of the sensor.
+      Configured as input.
+
+  max-range-cm:
+    type: int
+    required: false
+    default: 400
+    description: |
+      Maximum detection range in centimeters.
+      HC-SR04 typical maximum is 400 cm.
+
+  min-range-cm:
+    type: int
+    required: false
+    default: 2
+    description: |
+      Minimum detection range in centimeters.
+      HC-SR04 typical minimum is 2 cm.

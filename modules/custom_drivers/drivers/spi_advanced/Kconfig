@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPI Advanced Driver Kconfig
+
+menuconfig SPI_ADVANCED
+    bool "SPI Advanced Driver"
+    depends on SPI
+    help
+      Enable the advanced SPI driver with full capability support
+      including all SPI modes, DMA transfers, interrupts, and
+      multi-device chip select management.
+
+if SPI_ADVANCED
+
+config SPI_ADVANCED_INIT_PRIORITY
+    int "Driver initialization priority"
+    default 60
+    help
+      Device driver initialization priority.
+
+config SPI_ADVANCED_MAX_FREQUENCY
+    int "Maximum SPI frequency (Hz)"
+    default 10000000
+    help
+      Maximum SPI clock frequency supported.
+
+config SPI_ADVANCED_BUFFER_SIZE
+    int "Internal buffer size"
+    default 256
+    range 64 4096
+    help
+      Size of internal buffer for DMA and async operations.
+
+config SPI_ADVANCED_DMA
+    bool "Enable DMA support"
+    depends on DMA
+    default n
+    help
+      Enable DMA-based transfers for improved performance.
+
+config SPI_ADVANCED_DMA_THRESHOLD
+    int "DMA threshold (bytes)"
+    depends on SPI_ADVANCED_DMA
+    default 32
+    help
+      Minimum transfer size to use DMA. Smaller transfers
+      will use interrupt or polling mode.
+
+config SPI_ADVANCED_ASYNC
+    bool "Enable async API"
+    default y
+    help
+      Enable asynchronous (non-blocking) transfer API.
+
+config SPI_ADVANCED_STATS
+    bool "Enable statistics"
+    default y
+    help
+      Track transfer statistics (bytes, errors, timing).
+
+config SPI_ADVANCED_SHELL
+    bool "Enable shell commands"
+    depends on SHELL
+    default y
+    help
+      Enable shell commands for SPI driver testing.
+
+choice SPI_ADVANCED_DEFAULT_MODE
+    prompt "Default SPI mode"
+    default SPI_ADVANCED_MODE_0
+
+config SPI_ADVANCED_MODE_0
+    bool "Mode 0 (CPOL=0, CPHA=0)"
+
+config SPI_ADVANCED_MODE_1
+    bool "Mode 1 (CPOL=0, CPHA=1)"
+
+config SPI_ADVANCED_MODE_2
+    bool "Mode 2 (CPOL=1, CPHA=0)"
+
+config SPI_ADVANCED_MODE_3
+    bool "Mode 3 (CPOL=1, CPHA=1)"
+
+endchoice
+
+module = SPI_ADVANCED
+module-str = spi_advanced
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # SPI_ADVANCED

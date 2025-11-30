@@ -1,0 +1,12 @@
+/* MPU6050 Example - nRF52840 DK Board Overlay */
+
+&i2c0 {
+    status = "okay";
+
+    mpu6050: mpu6050@68 {
+        compatible = "invensense,mpu6050-custom";
+        reg = <0x68>;
+        /* Optional interrupt GPIO */
+        /* int-gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>; */
+    };
+};

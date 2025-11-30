@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: Apache-2.0
+# Device Tree binding for MPU6050 Custom Driver
+
+description: |
+  InvenSense MPU6050 6-axis IMU sensor.
+  Provides 3-axis accelerometer and 3-axis gyroscope readings.
+
+compatible: "invensense,mpu6050-custom"
+
+include: [sensor-device.yaml, i2c-device.yaml]
+
+properties:
+  reg:
+    required: true
+    description: |
+      I2C address. Default is 0x68 (AD0 low) or 0x69 (AD0 high).
+
+  int-gpios:
+    type: phandle-array
+    required: false
+    description: |
+      GPIO connected to the MPU6050 INT pin for data ready interrupt.
+
+  accel-fs:
+    type: int
+    required: false
+    default: 0
+    enum: [0, 1, 2, 3]
+    description: |
+      Accelerometer full-scale range:
+      0 = +/- 2g (default)
+      1 = +/- 4g
+      2 = +/- 8g
+      3 = +/- 16g
+
+  gyro-fs:
+    type: int
+    required: false
+    default: 0
+    enum: [0, 1, 2, 3]
+    description: |
+      Gyroscope full-scale range:
+      0 = +/- 250 dps (default)
+      1 = +/- 500 dps
+      2 = +/- 1000 dps
+      3 = +/- 2000 dps
+
+  sample-rate-div:
+    type: int
+    required: false
+    default: 0
+    description: |
+      Sample rate divider (0-255).
+      Sample rate = Gyro Output Rate / (1 + sample-rate-div)
+      Gyro Output Rate = 8kHz when DLPF disabled, 1kHz when enabled.
+
+  dlpf-cfg:
+    type: int
+    required: false
+    default: 6
+    enum: [0, 1, 2, 3, 4, 5, 6]
+    description: |
+      Digital Low Pass Filter configuration:
+      0 = Accel 260Hz, Gyro 256Hz, Fs = 8kHz
+      1 = Accel 184Hz, Gyro 188Hz, Fs = 1kHz
+      2 = Accel 94Hz, Gyro 98Hz, Fs = 1kHz
+      3 = Accel 44Hz, Gyro 42Hz, Fs = 1kHz
+      4 = Accel 21Hz, Gyro 20Hz, Fs = 1kHz
+      5 = Accel 10Hz, Gyro 10Hz, Fs = 1kHz
+      6 = Accel 5Hz, Gyro 5Hz, Fs = 1kHz (default)
